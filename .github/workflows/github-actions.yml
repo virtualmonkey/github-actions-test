@@ -35,7 +35,7 @@ jobs:
             "description": "Tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
-
+      
       - name: Tests 🚨
         if: ${{ failure() }}
         run: |
@@ -49,3 +49,5 @@ jobs:
             "description": "Tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
+
+      - run: npm run coverage
