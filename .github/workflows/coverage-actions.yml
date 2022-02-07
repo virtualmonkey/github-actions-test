@@ -7,7 +7,7 @@ jobs:
   check-coverage:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the Repo
+      # Checkout the Repository
       - uses: actions/checkout@v2
 
       - uses: artiomtr/jest-coverage-report-action@v2
