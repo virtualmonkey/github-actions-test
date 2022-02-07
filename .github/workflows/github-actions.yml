@@ -18,13 +18,10 @@ jobs:
           node-version: 12
 
       # Install dependencies
-      #- run: npm install
+      - run: npm install
 
       # Run tests
-      #- run: npm test
-
-      - run: yarn install
-      - run: yarn test:ci
+      - run: npm test
 
       - name: Tests ✅
         if: ${{ success() }}
