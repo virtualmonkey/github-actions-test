@@ -1,4 +1,4 @@
-name: Test Action
+name: tests
 on:
   pull_request:
     branches:
@@ -49,5 +49,3 @@ jobs:
             "description": "Tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
-
-      - run: npm run coverage
