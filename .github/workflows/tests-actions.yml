@@ -56,7 +56,16 @@ jobs:
       # Checkout the Repository
       - uses: actions/checkout@v2
 
-      - uses: artiomtr/jest-coverage-report-action@v2
+      # Install Node 12
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            threshold: 80
+          node-version: 12
+
+      # Install dependencies
+      - run: npm install
+
+      - run: npm run coverage
+
+      - run: |
+          python3 coverageVerificator.py coverage/coverage-summary.json ${{ github.THRESHOLD }}
