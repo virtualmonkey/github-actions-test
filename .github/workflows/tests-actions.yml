@@ -71,7 +71,7 @@ jobs:
       - run: |
           python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}
 
-  notify-slack-channel:
+  notify-slack:
     runs-on: ubuntu-latest
     steps:
       - name: Send Notification to Slack
