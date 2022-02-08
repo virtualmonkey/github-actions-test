@@ -67,9 +67,6 @@ jobs:
       - run: npm install
 
       - run: npm run coverage
-
-      - run: |
-          ls ${{ github.workspace }}
           
       - run: |
           python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}

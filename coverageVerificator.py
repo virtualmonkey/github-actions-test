@@ -15,8 +15,8 @@ except:
     raise Exception("Couldn't parse JSON file")
 
 if (float(percentage) < float(threshold)):
-    raise Exception
+    raise Exception("Coverage criteria was not met")
 
-print("Everything worked properly")
+print("Coverage criteria was met")
  
 file.close()
