@@ -51,15 +51,15 @@ jobs:
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
 
-      - name: Test Failed Slack Notif 🚨
-        if: ${{ success() }}
+      - name: Send Tests Failure Notification Slack
+        if: ${{ failure() }}
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: continuous-integration
-          status: This-depends-on-Tests-success
-          color: good
+          status: FAILED
+          color: danger
 
   check-coverage:
     runs-on: ubuntu-latest
@@ -81,14 +81,12 @@ jobs:
       - run: |
           python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}
 
-  # notify-slack:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Send Notification to Slack
-  #       uses: voxmedia/github-action-slack-notify-build@v1
-  #       with:
-  #         channel: continuous-integration
-  #         status: SUCCESS
-  #         color: good
-  #       env:
-  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Send Coverage Failure Notification Slack
+        if: ${{ failure() }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: continuous-integration
+          status: FAILED
+          color: danger
