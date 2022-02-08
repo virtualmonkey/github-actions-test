@@ -36,6 +36,14 @@ jobs:
             "description": "Tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
+
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: continuous-integration
+          status: SUCCESS-TEST
+          color: good
       
       - name: Tests 🚨
         if: ${{ failure() }}
@@ -71,14 +79,14 @@ jobs:
       - run: |
           python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}
 
-  notify-slack:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send Notification to Slack
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: continuous-integration
-          status: SUCCESS
-          color: good
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  # notify-slack:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Send Notification to Slack
+  #       uses: voxmedia/github-action-slack-notify-build@v1
+  #       with:
+  #         channel: continuous-integration
+  #         status: SUCCESS
+  #         color: good
+  #       env:
+  #         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
