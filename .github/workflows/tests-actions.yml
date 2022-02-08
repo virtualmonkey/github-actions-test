@@ -36,16 +36,6 @@ jobs:
             "description": "Tests passed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
-
-      - name: Test Passed Slack Notif ✅
-        if: ${{ success() }}
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: continuous-integration
-          status: SUCCESS-TEST
-          color: good
       
       - name: Tests 🚨
         if: ${{ failure() }}
@@ -60,6 +50,16 @@ jobs:
             "description": "Tests failed",
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
+
+      - name: Test Failed Slack Notif 🚨
+        if: ${{ success() }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: continuous-integration
+          status: This-depends-on-Tests-success
+          color: good
 
   check-coverage:
     runs-on: ubuntu-latest
