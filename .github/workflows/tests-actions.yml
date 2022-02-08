@@ -73,11 +73,11 @@ jobs:
 
   notify-slack:
     runs-on: ubuntu-latest
-      steps:
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: continuous-integration
-          status: SUCCESS
-          color: good
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    steps:
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: continuous-integration
+        status: SUCCESS
+        color: good
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
