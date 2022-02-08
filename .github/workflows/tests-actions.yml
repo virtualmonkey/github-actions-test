@@ -72,4 +72,4 @@ jobs:
           ls ${{ github.workspace }}
           
       - run: |
-          python3 coverageVerificator.py coverage/coverage-summary.json ${{ secret.THRESHOLD }}
+          python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}
