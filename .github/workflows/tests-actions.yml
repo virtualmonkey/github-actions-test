@@ -20,9 +20,9 @@ jobs:
       - run: npm install
 
       # Run tests
-      - run: npm test
+      - run: npm run test
 
-      - name: Tests ✅
+      - name: Tests Sucess
         if: ${{ success() }}
         run: |
           curl --request POST \
@@ -36,7 +36,7 @@ jobs:
             "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }'
       
-      - name: Tests 🚨
+      - name: Tests Failure
         if: ${{ failure() }}
         run: |
           curl --request POST \
@@ -57,7 +57,7 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: continuous-integration
-          status: FAILED
+          status: FAILED-TESTS
           color: danger
 
   check-coverage:
@@ -75,7 +75,7 @@ jobs:
       # Install dependencies
       - run: npm install
 
-      - run: npm run coverage
+      - run: npm run test:summary
           
       - run: |
           python3 coverageVerificator.py coverage/coverage-summary.json ${{ secrets.THRESHOLD }}
@@ -87,5 +87,5 @@ jobs:
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
           channel: continuous-integration
-          status: FAILED
+          status: FAILED-COVERAGE
           color: danger

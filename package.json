@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "coverage": "jest --coverage --coverageReporters='json-summary'"
+    "test:summary": "jest --coverage --coverageReporters='json-summary'"
   },
   "repository": {
     "type": "git",
